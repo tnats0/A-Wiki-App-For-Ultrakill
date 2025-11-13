@@ -59,6 +59,9 @@ def clear()->None: # Function to clear the terminal
     else:
         os.system("clear") # Linux and Macos
 
+def move(r,c):
+    print(f"\033[{r};{c}H")
+
 #-- Test Side --#
 
 def test()->None:
