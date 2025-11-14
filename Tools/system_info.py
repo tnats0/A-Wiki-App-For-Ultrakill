@@ -25,7 +25,6 @@ ram_usage = f"{round(psutil.virtual_memory().percent)}%"
 
 ram_info = (ram,ram_usage)
 
-
 gpu = pc.Win32_VideoController()[0].name
 
 info = {

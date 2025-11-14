@@ -1,7 +1,7 @@
 from Tools.typeTools import *
 from Tools.system_info import *
 
-cur_path = "C:\\Users\\TARIK ATASOY\\projects\\helloworld\\Projects\\Terminal\\Images\\ascii2.txt"
+cur_path = "C:\\Users\\TARIK ATASOY\\projects\\helloworld\\Projects\\Terminal\\Images\\ascii_image.txt"
 
 
 def set_image(path=cur_path):
