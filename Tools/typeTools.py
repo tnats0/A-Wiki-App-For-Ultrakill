@@ -62,6 +62,13 @@ def clear()->None: # Function to clear the terminal
 def move(r,c):
     print(f"\033[{r};{c}H")
 
+def typeMove(dis):
+
+    print(dis*" ",end="")
+
+
+
+
 #-- Test Side --#
 
 def test()->None:

@@ -1,5 +1,6 @@
 from Tools.typeTools import *
 from Tools.system_info import *
+from Tools.time_info import *
 
 cur_path = "C:\\Users\\TARIK ATASOY\\projects\\helloworld\\Projects\\Terminal\\Images\\ascii_image.txt"
 
@@ -34,13 +35,27 @@ def imag_widht(path=cur_path):
     return lenght
 
 
+distance  = imag_widht()+10
+
+
 def sysStats():
 
-    column = imag_widht() + 10
 
     move(3,0)
 
     for x in info.values():
 
-        print(column*" ",x)
+        typeMove(distance)
+        print("•",x)
+
+
+def showDate():
+
+    row = len(info.values())+6
+
+    move(row,0)
+
+    typeMove(distance)
+
+    print(dateInfo,end="")
 
