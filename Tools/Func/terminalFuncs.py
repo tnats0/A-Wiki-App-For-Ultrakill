@@ -2,6 +2,8 @@ from Tools.typeTools import *
 from Tools.system_info import *
 from Tools.time_info import *
 
+tpwd = "admin123"
+
 cur_path = "C:\\Users\\TARIK ATASOY\\projects\\helloworld\\Projects\\Terminal\\Images\\ascii_image.txt"
 
 
@@ -34,9 +36,7 @@ def imag_widht(path=cur_path):
 
     return lenght
 
-
 distance  = imag_widht()+10
-
 
 def sysStats():
 
@@ -48,7 +48,6 @@ def sysStats():
         typeMove(distance)
         print("•",x)
 
-
 def showDate():
 
     row = len(info.values())+6
@@ -59,3 +58,6 @@ def showDate():
 
     print(dateInfo,end="")
 
+def lock():
+
+    empt = f"[{len(tpwd)*"_"}]"

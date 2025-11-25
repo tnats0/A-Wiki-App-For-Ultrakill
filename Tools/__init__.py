@@ -1,1 +1,1 @@
-from .theFuncs import *
+from .Func.terminalFuncs import *
