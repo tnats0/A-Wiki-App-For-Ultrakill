@@ -2,7 +2,19 @@ from Tools.typeTools import *
 from Tools.system_info import *
 from Tools.time_info import *
 
-tpwd = "admin123"
+# Rich 
+
+from rich.console import Console
+from rich.markup import escape 
+
+myStyle:dict = {
+    "success": "bold green",
+    "error": "bold underline red",
+    "important":"bold underline blue"
+} 
+
+terminal = Console()
+
 
 cur_path = "C:\\Users\\TARIK ATASOY\\projects\\helloworld\\Projects\\Terminal\\Images\\ascii_image.txt"
 
@@ -40,13 +52,12 @@ distance  = imag_widht()+10
 
 def sysStats():
 
-
     move(3,0)
 
     for x in info.values():
 
         typeMove(distance)
-        print("•",x)
+        terminal.print(f"• {escape(x)}",style="bold cyan")
 
 def showDate():
 
@@ -58,6 +69,3 @@ def showDate():
 
     print(dateInfo,end="")
 
-def lock():
-
-    empt = f"[{len(tpwd)*"_"}]"
