@@ -27,7 +27,7 @@ ram_info = (ram,ram_usage)
 
 gpu = pc.Win32_VideoController()[0].name
 
-info = {
+sys_info = {
 
     "Computer Network Name: ": cnm,
     "Operating System: ": os,

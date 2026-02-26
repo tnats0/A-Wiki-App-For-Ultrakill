@@ -1,4 +1,4 @@
-from Tools import *
+from GUI.Func.terminalFuncs import *
 
 clear()
 

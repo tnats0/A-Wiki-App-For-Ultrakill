@@ -1,25 +1,12 @@
-from Tools.typeTools import *
-from Tools.system_info import *
-from Tools.time_info import *
+from Data.system_info import *
+from Data.time_info import *
 
-# Rich 
-
-from rich.console import Console
-from rich.markup import escape 
-
-myStyle:dict = {
-    "success": "bold green",
-    "error": "bold underline red",
-    "important":"bold underline blue"
-} 
-
-terminal = Console()
+from GUI.typeTools import *
+from GUI.gui_config import *
 
 
-cur_path = "C:\\Users\\TARIK ATASOY\\projects\\helloworld\\Projects\\Terminal\\Images\\ascii_image.txt"
 
-
-def set_image(path=cur_path):
+def set_image(path=IMAGE_PATH):
 
     with open(path,"r",encoding="utf-8") as image:
 
@@ -30,7 +17,7 @@ def set_image(path=cur_path):
             part = image.readline()
 
 
-def imag_widht(path=cur_path):
+def imag_widht(path=IMAGE_PATH):
 
     with open(path,"r") as file:
 
@@ -48,20 +35,22 @@ def imag_widht(path=cur_path):
 
     return lenght
 
+
+
 distance  = imag_widht()+10
 
 def sysStats():
 
     move(3,0)
 
-    for x in info.values():
+    for x in sys_info.values():
 
         typeMove(distance)
-        terminal.print(f"• {escape(x)}",style="bold cyan")
+        terminal.print(f"• {x}",style="info",highlight=False)
 
 def showDate():
 
-    row = len(info.values())+6
+    row = len(sys_info.values())+6
 
     move(row,0)
 
