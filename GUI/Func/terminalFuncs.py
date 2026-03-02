@@ -1,7 +1,7 @@
 from Data.system_info import *
 from Data.time_info import *
 
-from GUI.typeTools import *
+from GUI.Func.typeTools import *
 from GUI.gui_config import *
 
 
