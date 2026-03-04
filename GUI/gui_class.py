@@ -7,7 +7,9 @@ from testamentData import *
 class App:
 
     def __init__(self):
-        
+
+        self.testamentNum = 1 # TODO: Relocate the variable
+
         self.mainWindow = CTk()
 
         # * Main Window
@@ -38,7 +40,7 @@ class App:
         # * Layouts Inside Frames
 
         self.leftFrame.columnconfigure([*range(3)],weight=1)
-        self.leftFrame.rowconfigure([*range(6)],weight=1) # !!
+        self.leftFrame.rowconfigure([*range(6)],weight=1) 
 
         self.rightFrameOut.columnconfigure([*range(3)],weight=1)
         self.rightFrameOut.rowconfigure([*range(3)],weight=1)
@@ -75,6 +77,8 @@ class App:
         print("Activated!")
 
     def create_testaments_page(self):
+
+        # * Testaments Page
         
         self.testamentsPage = CTkToplevel(self.mainWindow)
 
@@ -83,13 +87,53 @@ class App:
         self.testamentsPage.minsize(self.w,self.h)
         self.testamentsPage.maxsize(self.w,self.h)
 
+        # * Layout
+
         self.testamentsPage.rowconfigure([*range(3)],weight=1)
         self.testamentsPage.columnconfigure([*range(3)],weight=1)
 
+        # * Buttons
 
-        self.label1 = CTkLabel(self.testamentsPage,text=testaments["1"])
-        self.label1.grid(row=1,column=1)
+        self.preButton = CTkButton(self.testamentsPage,text=" <-- ",command=self.previous_page,fg_color=colors["darker_grey"],width=40,height=40)
+        self.nextButton = CTkButton(self.testamentsPage,text=" --> ",command=self.next_page,fg_color=colors["darker_grey"],width=40,height=40)
+
+        # * Button Placement
+
+        self.preButton.grid(row=2,column=0,sticky=SW)        
+        self.nextButton.grid(row=2,column=2,sticky=SE)        
+
+        # * Label and Label Placement
+
+
+        self.testamentLabel = CTkLabel(self.testamentsPage,text=testaments[f"{self.testamentNum}"])
+        self.testamentLabel.grid(row=1,column=1)
         
+
+    def next_page(self):
+
+        self.testamentNum += 1
+
+        if self.testamentNum > 5:
+
+            self.testamentNum = 1
+
+        self.testamentLabel.destroy()
+        self.testamentLabel = CTkLabel(self.testamentsPage,text=testaments[f"{self.testamentNum}"])
+        self.testamentLabel.grid(row=1,column=1)
+
+
+    def previous_page(self):
+
+        self.testamentNum -= 1
+
+        if self.testamentNum < 1:
+
+            self.testamentNum = 5
+
+        self.testamentLabel.destroy()
+        self.testamentLabel = CTkLabel(self.testamentsPage,text=testaments[f"{self.testamentNum}"])
+        self.testamentLabel.grid(row=1,column=1)
+
 
     def quit(self):
 
