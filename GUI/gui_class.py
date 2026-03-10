@@ -1,7 +1,7 @@
 from customtkinter import *
 from config import *
 
-from testamentData import *
+from dataProcess import *
 
 
 class App:
@@ -57,7 +57,7 @@ class App:
         # * Buttons
 
         enemiesButton = CTkButton(self.buttonFrame,text="Enemies",command=self.action,width=200,height=45,fg_color=colors["darker_grey"])
-        booksButton = CTkButton(self.buttonFrame,text="Books",command=self.action,width=200,height=45,fg_color=colors["darker_grey"])
+        booksButton = CTkButton(self.buttonFrame,text="Books",command=self.create_book_page,width=200,height=45,fg_color=colors["darker_grey"])
         testamentsButton = CTkButton(self.buttonFrame,text="Testaments",command=self.create_testaments_page,width=200,height=45,fg_color=colors["darker_grey"])
         quitButton = CTkButton(self.buttonFrame,text="Quit",command=self.quit,width=200,height=45,fg_color=colors["darker_grey"])
 
@@ -104,10 +104,30 @@ class App:
 
         # * Label and Label Placement
 
-
         self.testamentLabel = CTkLabel(self.testamentsPage,text=testaments[f"{self.testamentNum}"])
         self.testamentLabel.grid(row=1,column=1)
         
+
+    def create_book_page(self):
+
+        self.bookPage = CTkToplevel(self.mainWindow)
+
+        self.bookPage.title("Books")
+
+        self.bookPage.minsize(self.w,self.h)
+        self.bookPage.maxsize(self.w,self.h)
+
+
+        self.bookPage.rowconfigure([*range(3)],weight=1)
+        self.bookPage.columnconfigure([*range(3)],weight=1)
+
+
+        self.bookLabel = CTkLabel(self.bookPage,text=bookData_1_4)
+        self.bookLabel.grid(row=1,column=1)
+
+
+
+
 
     def next_page(self):
 
