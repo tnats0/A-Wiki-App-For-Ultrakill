@@ -9,6 +9,8 @@ class App:
     def __init__(self):
 
         self.testamentNum = 1 # TODO: Relocate the variable
+        self.totalPage = (0,0)
+        self.pageNum = 0
 
         self.mainWindow = CTk()
 
@@ -108,7 +110,9 @@ class App:
         self.testamentLabel.grid(row=1,column=1)
         
 
-    def create_book_page(self):
+    def create_book_page(self,pageNum:int=0):
+
+        self.pages = books
 
         self.bookPage = CTkToplevel(self.mainWindow)
 
@@ -122,10 +126,14 @@ class App:
         self.bookPage.columnconfigure([*range(3)],weight=1)
 
 
-        self.bookLabel = CTkLabel(self.bookPage,text=bookData_1_4)
+        self.bookLabel = CTkLabel(self.bookPage,text=load(bookList[0]))
         self.bookLabel.grid(row=1,column=1)
 
+        self.pButton = CTkButton(self.bookPage,text="<--",command=self.previous_page,fg_color=colors["darker_grey"],width=40,height=40)
+        self.nButton = CTkButton(self.bookPage,text="-->",command=lambda:self.next(pageNum,self.pages,self.bookPage),fg_color=colors["darker_grey"],width=40,height=40)
 
+        self.pButton.grid(row=2,column=0)
+        self.nButton.grid(row=2,column=2)
 
 
 
@@ -153,6 +161,25 @@ class App:
         self.testamentLabel.destroy()
         self.testamentLabel = CTkLabel(self.testamentsPage,text=testaments[f"{self.testamentNum}"])
         self.testamentLabel.grid(row=1,column=1)
+
+    
+
+    def next(self,pageNum:int,pages:list,master):
+
+        pageNum += 1
+
+        if pageNum > len(pages)-1:
+            pageNum = 0
+        
+        page = pages[pageNum]
+
+        
+        self.newLabel = CTkLabel(master,text=page)
+        self.newLabel.grid(row=1,column=1)
+
+
+
+
 
 
     def quit(self):

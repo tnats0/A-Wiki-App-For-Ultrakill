@@ -4,13 +4,23 @@ MAIN_FOLDER = Path(__file__).absolute().parent
 
 
 TESTAMENT_PATH = MAIN_FOLDER / "Testaments"
-BOOK_PATH =  MAIN_FOLDER / "Books" / "book1_4.txt"
+BOOK_PATH =  MAIN_FOLDER / "Books" 
 
 
+def load(lct:Path,encd:str="utf-8"):
 
-with open(BOOK_PATH,"r",encoding="utf-8") as book:
-    
-    bookData_1_4 = book.read()
+    with open(lct,"r",encoding=encd) as file:
+
+        data = file.read()
+
+    return data
+
+
+bookList = list(BOOK_PATH.iterdir())
+
+
+books = [load(d) for d in bookList]
+
 
 
 
@@ -25,3 +35,4 @@ for i in range(len(testamentList)):
         testaments[f"{i+1}"] =  file.read()
 
 
+print(books)
