@@ -1,5 +1,5 @@
 from pathlib import *
-from customtkinter import FontManager
+from customtkinter import FontManager,CTkFont
 
 FONT_PATH = Path(__file__).absolute().parent / "VCR_OSD_MONO_1.001.ttf"
 
@@ -7,6 +7,8 @@ FONT_PATH = Path(__file__).absolute().parent / "VCR_OSD_MONO_1.001.ttf"
 FontManager.load_font(str(FONT_PATH))
 
 smileFont = ("VCR OSD Mono",20)
+
+
 
 
 colors = {
@@ -17,7 +19,7 @@ colors = {
     "window_bg":        "#1e1e1e",
     "titlebar_top":     "#8b1a1a",
     "titlebar_bot":     "#6b1111",
-    "titlebar_border":  "#3a0808",
+    "titlebar_border":  "#290505",
     "left_panel":       "#252525",
     "right_panel":      "#2a2a2a",
     "panel_border":     "#5a1a1a",
