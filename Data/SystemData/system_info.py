@@ -29,11 +29,13 @@ gpu = pc.Win32_VideoController()[0].name
 
 sys_info = {
 
-    "Computer Network Name: ": cnm,
-    "Operating System: ": os,
-    "CPU: ":cpu,
-    "RAM Info: ": f"{ram_info[0]}  {ram_info[1]}",
-    "GPU: ":gpu
+    "Computer Network Name": cnm,
+    "Operating System": os,
+    "CPU":cpu,
+    "RAM Info": f"{ram_info[0]}  {ram_info[1]}",
+    "GPU":gpu
  }
 
-# -- Functions -- #
+
+sys_info_minimized = f"| {sys_info['CPU']} | {sys_info['GPU']}"
+

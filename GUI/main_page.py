@@ -2,6 +2,7 @@ from customtkinter import *
 from rich.text import *
 
 from Data.SystemData.guiConfig import *
+from Data.SystemData.system_info import sys_info_minimized
 
 from Data.ExtraData.dataProcess import testaments,books
 
@@ -105,7 +106,7 @@ class ButtonFrame(CTkFrame):
         self.quitButton.pack(pady=2)
 
 
-class LogoFrame(CTkFrame): # TODO: 
+class LogoFrame(CTkFrame): 
 
     def __init__(self,parent):
         super().__init__(parent)
@@ -119,20 +120,20 @@ class LogoFrame(CTkFrame): # TODO:
 
     def create_widgets(self):
 
-        self.textRowFrame = CTkFrame(self,fg_color="transparent")
+        self.textRowFrame = CTkFrame(self,fg_color="transparent",bg_color="transparent")
 
-        self.logoText = CTkLabel(self.textRowFrame,text = "Smile ",font=CTkFont("Arial",30,"bold"))
-        self.logoText2 = CTkLabel(self.textRowFrame,text = "OS 2.0",font=CTkFont("Arial",15,"bold"))
+        self.logoText = CTkLabel(self.textRowFrame,text = "Smile",font=CTkFont("Arial",40,"bold"))
+        self.logoText2 = CTkLabel(self.textRowFrame,text = "OS 2.0",font=CTkFont("Arial",25,"bold"))
 
-        self.rainbowBar = self.create_rainbow_gradient_bar(150)
+        self.rainbowBar = self.create_rainbow_gradient_bar(200,5)
   
 
     def place_widgets(self):
 
         self.textRowFrame.pack()
 
-        self.logoText.pack(side=LEFT,anchor="s") 
-        self.logoText2.pack(side=LEFT,anchor="s")
+        self.logoText.pack(side=LEFT,anchor=S) 
+        self.logoText2.pack(side=LEFT,anchor=S)
         self.rainbowBar.pack()
 
     def create_rainbow_gradient_bar(self,width:int=120,height:int=3):
@@ -150,8 +151,6 @@ class LogoFrame(CTkFrame): # TODO:
         return self.bar
 
 
-
-
 class TipFrame(CTkFrame):
 
     def __init__(self,parent:App):
@@ -167,7 +166,7 @@ class TipFrame(CTkFrame):
 
         self.inFrame = CTkFrame(self,fg_color=colors["tip_body"],corner_radius=1)
         self.inFrameTopBar = CTkFrame(self.inFrame,fg_color=colors["titlebar_top"])
-        self.inFrameTitle = CTkLabel(self.inFrameTopBar,text="Tip Of The Day",font=CTkFont("Arial",16,"bold"))
+        self.inFrameTitle = CTkLabel(self.inFrameTopBar,text=" Tip Of The Day ",font=CTkFont("Arial",16,"bold"))
 
     def place_widgets(self):
 
@@ -187,17 +186,19 @@ class TopBar(CTkFrame):
         self.configure(fg_color=colors["titlebar_top"],corner_radius=5, height=1)
 
         
-
         self.create_widgets()
         self.place_widgets()
 
 
     def create_widgets(self):
 
-        self.titleLabel = CTkLabel(self,text="SmileOS 2.0",font=CTkFont("Arial",14,"bold")) 
+        self.iconLabel = CTkLabel(self,text="LOGO") 
+        self.titleLabel = CTkLabel(self,text=" SmileOS 2.0 ",font=CTkFont("Arial",14,"bold"))
+
 
     def place_widgets(self):
 
+        self.iconLabel.pack(side=LEFT,padx=10)
         self.titleLabel.pack(side=LEFT)
 
     
@@ -215,11 +216,18 @@ class StatusBar(CTkFrame):
 
     def create_widgets(self):
 
-        self.statusLabel = CTkLabel(self,text="• SYSTEM READY",text_color="green",font=("Courier",10))
+        self.dot = CTkFrame(self,width=6,height=6,corner_radius=3,fg_color=colors["status_dot"])
+        self.text = CTkLabel(self,text="SYSTEM READY ",text_color=colors["status_text"],font=("Courier",10))
 
+        self.stats = CTkLabel(self,text=sys_info_minimized,text_color=colors["status_text"],font=("Courier",10))
+
+       
     def place_widgets(self):
 
-        self.statusLabel.pack(side=LEFT)
+        self.dot.pack(side=LEFT,padx=(12,6),pady=8)
+        self.text.pack(side=LEFT)
+
+        self.stats.pack(side=LEFT)
         
 
 
