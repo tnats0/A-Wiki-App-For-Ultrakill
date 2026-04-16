@@ -13,42 +13,68 @@ from GUI.side_page import *
 
 class App(CTk):
 
-    def __init__(self,title:str,size:tuple[int],font,resizable:bool=False):
+    def __init__(self,title:str,size:tuple[int],resizable:bool=False):
         super().__init__()
 
         self.title(title)
+
+        self.isMain = False
         
         self.geometry(f"{size[0]}x{size[1]}")
         self.resizable(resizable,resizable)
 
-        self.font = font
-
-        self.configure(fg_color=colors["window_bg"])
-
-        topBar = TopBar(self)
-        topBar.place(relwidth=1,relheight=0.1,rely=0)
-
-        mainButtonFrame = ButtonFrame(self,self.create_books_page,self.create_testaments_page,self.quit,self.font)
-        mainButtonFrame.place(relwidth=0.4,relheight=0.85,rely=0.1)
-
-        logoFrame = LogoFrame(mainButtonFrame)
-        logoFrame.grid(row=0,column=1)
-
-        mainTipFrame = TipFrame(self)
-        mainTipFrame.place(relwidth=0.6,relheight=0.85,relx=0.4,rely=0.1)
-
-        statusBar = StatusBar(self)
-        statusBar.place(relwidth=1,relheight=0.05,rely=0.95)
+        self.create_main_page()
 
         self.mainloop()
 
+    def create_main_page(self):
+            
+        if not self.isMain:    
+        
+            self.font = ("VCR OSD Mono",20)
+
+            self.configure(fg_color=colors["window_bg"])
+
+            self.topBar = TopBar(self)
+            self.topBar.place(relwidth=1,relheight=0.1,rely=0)
+
+            self.mainButtonFrame = ButtonFrame(self,self.create_books_page,self.create_testaments_page,self.quit,self.font)
+            self.mainButtonFrame.place(relwidth=0.4,relheight=0.85,rely=0.1)
+
+            self.logoFrame = LogoFrame(self.mainButtonFrame)
+            self.logoFrame.grid(row=0,column=1)
+
+            self.mainTipFrame = TipFrame(self)
+            self.mainTipFrame.place(relwidth=0.6,relheight=0.85,relx=0.4,rely=0.1)
+
+            self.statusBar = StatusBar(self)
+            self.statusBar.place(relwidth=1,relheight=0.05,rely=0.95)
+
+            self.isMain = True
+
+
+    def destroy_section(self):
+
+        self.mainButtonFrame.destroy()
+        self.mainTipFrame.destroy()
+        self.isMain = False
+
     def create_testaments_page(self):
 
-        self.pageTestament = PageWindow(self,f"{self.title()} - Testaments",(640,480),testaments,self.font,True)
+        self.topBar.titleLabel.configure(text= f"{self.topBar.titleLabel._text} -> Testaments")
+
+        self.destroy_section()
+        self.pageTestament = PageWindow(self,testaments)
+        self.pageTestament.place(relwidth=1,relheight=0.85,rely=0.1)
+
 
     def create_books_page(self):
 
-        self.pageBook = PageWindow(self,f"{self.title()} - Books",(640,480),books,self.font,True)
+        self.topBar.titleLabel.configure(text= f"{self.topBar.titleLabel._text} -> Books")
+
+        self.destroy_section()
+        self.pageBook = PageWindow(self,books)
+        self.pageBook.place(relwidth=1,relheight=0.85,rely=0.1)
 
 
     def quit(self):
@@ -194,12 +220,14 @@ class TopBar(CTkFrame):
 
         self.iconLabel = CTkLabel(self,text="LOGO") 
         self.titleLabel = CTkLabel(self,text=" SmileOS 2.0 ",font=CTkFont("Arial",14,"bold"))
+        self.homeButton = CTkButton(self,text="▣",font=("Arial",20),width=30,height=30,fg_color=colors["titlebar_bot"],command=self.parent.create_main_page)
 
 
     def place_widgets(self):
 
         self.iconLabel.pack(side=LEFT,padx=10)
         self.titleLabel.pack(side=LEFT)
+        self.homeButton.pack(side=RIGHT,padx=10)
 
     
 class StatusBar(CTkFrame):
@@ -232,5 +260,3 @@ class StatusBar(CTkFrame):
 
 
         
-
-

@@ -4,25 +4,21 @@ from Data.SystemData.guiConfig import *
 from Data.ExtraData.dataProcess import *
 
 
-class PageWindow(CTkToplevel):
+class PageWindow(CTkFrame):
 
-    def __init__(self,parent,title:str,size:tuple[int],pages:list,font,resizable:bool=False):
+    def __init__(self,parent,pages:list):
         super().__init__(parent)
 
-        self.title(title)
-        self.geometry(f"{size[0]}x{size[1]}")
-        self.resizable(resizable,resizable)
-
-        self.font = font
+        self.font = ("VCR OSD Mono",12)
 
         self.pages = pages
         self.totalPage = len(pages)
 
         self.topFrame = PageTextFrame(self,self.pages[0],self.font)
-        self.bottomFrame = PageButtonFrame(self,self.totalPage,self.change_page,self.font)
+        self.topFrame.place(relwidth=1,relheight=0.9,rely=0)
 
-        self.topFrame.place(relwidth=1,relheight=0.8,rely=0)
-        self.bottomFrame.place(relwidth=1,relheight=0.2,rely=0.8)
+        self.bottomFrame = PageButtonFrame(self,self.totalPage,self.change_page,self.font)        
+        self.bottomFrame.place(relwidth=1,relheight=0.1,rely=0.9)
 
     def change_page(self,newPageNum:int):
 
@@ -38,7 +34,8 @@ class PageTextFrame(CTkFrame):
 
         self.textFrameFont = font
 
-
+        self.configure(fg_color=colors["tip_body"])
+        
         self.create_widgets()
 
 
@@ -73,8 +70,8 @@ class PageButtonFrame(CTkFrame):
 
         self.pageLabel =CTkLabel(self,text=f"{self.pageNum+1}/{self.totalPageCount}",font=self.buttonFrameFont)
 
-        self.nextButton = CTkButton(self,text="-->",width=50,height=50,command=lambda:self.send_new_page_num(1))
-        self.preButton = CTkButton(self,text="<--",width=50,height=50,command=lambda:self.send_new_page_num(0))
+        self.nextButton = CTkButton(self,text="-->",font=("VCR OSD Mono",10),fg_color=colors["btn_active_border"],width=25,height=25,command=lambda:self.send_new_page_num(1))
+        self.preButton = CTkButton(self,text="<--",font=("VCR OSD Mono",10),fg_color=colors["btn_active_border"],width=25,height=25,command=lambda:self.send_new_page_num(0))
     
 
     def create_layout(self,w,h):
