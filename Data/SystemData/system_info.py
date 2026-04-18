@@ -31,11 +31,11 @@ sys_info = {
 
     "Computer Network Name": cnm,
     "Operating System": os,
-    "CPU":cpu,
+    # "CPU":cpu,
     "RAM Info": f"{ram_info[0]}  {ram_info[1]}",
     "GPU":gpu
  }
 
-
-sys_info_minimized = f"| {sys_info['CPU']} | {sys_info['GPU']}"
-
+try:
+    sys_info_minimized = f"| {sys_info['CPU']} | {sys_info['GPU']}"
+except: sys_info_minimized = "| System Components Are Not Found :("
